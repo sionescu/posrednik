@@ -39,14 +39,13 @@
       (error "Cannot list interfaces: ~A ~A returned ~A"
              *ipcmd* "link" retcode))
     (let ((interfaces ()))
-      (ppcre:do-register-groups
-          (id name (#'parse-iflags flags) (#'parse-iproplist properties) address)
-         (+ifaceinfo-regexp+ stdout)
+      (ppcre:do-register-groups (id name flags properties address)
+          (+ifaceinfo-regexp+ stdout)
         (push (make-instance 'interface
                              :id id
                              :name name
-                             :flags flags
-                             :props properties
+                             :flags (parse-iflags flags)
+                             :props (parse-iproplist properties)
                              :link :ethernet
                              :type (detect-iface-type name)
                              :address address)
