@@ -29,12 +29,11 @@
               (interface.address i)))))
 
 (defconstant (+ifaceinfo-regexp+ :test #'string=)
-  "([0-9]): ([a-z0-9.]+): <([-_,A-Z]+)> ([ _a-zA-Z0-9]+)
- +link/ether ([0-9a-f][:0-9a-f]+)")
+  "([0-9]): ([a-z0-9.]+): <([-_,A-Z]+)> ([ _a-zA-Z0-9]+)\\\\ +link/ether ([0-9a-f][:0-9a-f]+)")
 
 (defun list-interfaces ()
   (multiple-value-bind (retcode stdout)
-      (run-program (list *ipcmd* "link"))
+      (run-program (list *ipcmd* "--oneline" "link"))
     (unless (zerop retcode)
       (error "Cannot list interfaces: ~A ~A returned ~A"
              *ipcmd* "link" retcode))
