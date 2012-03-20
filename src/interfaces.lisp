@@ -17,16 +17,17 @@
    (address   :initarg :address   :reader interface.address)))
 
 (defmethod print-object (i s)
-  (flet ((print-prop-to-string (p)
+  (flet ((princ-prop-to-string (p)
            (format nil ":~A ~A" (string-downcase (car p)) (cdr p))))
     (print-unreadable-object (i s :type nil :identity nil)
       (format s "~A: ~A: <~A> ~A :link/~A/~A ~A"
               (interface.id i)
               (interface.name i)
               (join* #\, (mapcar #'string-upcase (interface.flags i)))
-              (join* #\Space (mapcar #'print-prop-to-string (interface.props i)))
-              (string-downcase (interface.link i)) (string-downcase (interface.type i))
               (interface.address i)))))
+              (join* #\Space (mapcar #'princ-prop-to-string (interface.props i)))
+              (string-downcase (interface.link i))
+              (string-downcase (interface.type i))
 
 (defconstant (+ifaceinfo-regexp+ :test #'string=)
   "([0-9]): ([a-z0-9.]+): <([-_,A-Z]+)> ([ _a-zA-Z0-9]+)\\\\ +link/ether ([0-9a-f][:0-9a-f]+)")
