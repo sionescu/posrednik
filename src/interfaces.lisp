@@ -61,7 +61,9 @@
              ("UP"         :up)
              ("DOWN"       :down)
              ("LOWER_UP"   :lower-up)
-             ("NO-CARRIER" :no-carrier))))
+             ("NO-CARRIER" :no-carrier)
+             ("PROMISC"    :promiscuous)
+             ("NOARP"      :noarp))))
     (mapcar #'intern-flag (split-sequence #\, flags))))
 
 (defun parse-iproplist (properties)
@@ -88,7 +90,8 @@
   (eswitch (state :test #'string=)
     ("UNKNOWN" :unknown)
     ("UP"      :up)
-    ("DOWN"    :down)))
+    ("DOWN"    :down)
+    ("DORMANT" :dormant)))
 
 (defun detect-iface-type (name)
   (if (directory-exists-p (format nil "/sys/class/net/~A/wireless" name))
