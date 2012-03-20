@@ -7,6 +7,6 @@
 
 (defpackage :middleman
   (:nicknames #:mm)
-  (:use :iolib.base :cffi :iolib.os)
+  (:use :iolib.base :cffi :iolib.pathnames :iolib.os)
   (:export
    ))

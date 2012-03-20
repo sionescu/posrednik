@@ -8,9 +8,10 @@
                                                      *load-truename*)))
                (read f))
   :licence "GPL-3"
-  :depends-on (:iolib.base :iolib.syscalls :iolib.os :cffi)
+  :depends-on (:iolib.base :iolib.syscalls :iolib.os :cffi :cl-ppcre)
   :pathname "src/"
-  :components ((:file "pkgdcl")))
+  :components ((:file "pkgdcl")
+               (:file "interfaces" :depends-on ("pkgdcl"))))
 
 (defmethod perform ((o test-op) (c (eql (find-system :middleman))))
   (oos 'test-op :middleman-tests))
