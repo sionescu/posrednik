@@ -24,10 +24,10 @@
               (interface.id i)
               (interface.name i)
               (join* #\, (mapcar #'string-upcase (interface.flags i)))
-              (interface.address i)))))
               (join* #\Space (mapcar #'princ-prop-to-string (interface.props i)))
               (string-downcase (interface.link i))
               (string-downcase (interface.type i))
+              (princ-macaddr-to-string (interface.address i))))))
 
 (defconstant (+ifaceinfo-regexp+ :test #'string=)
   "([0-9]): ([a-z0-9.]+): <([-_,A-Z]+)> ([ _a-zA-Z0-9]+)\\\\ +link/ether ([0-9a-f][:0-9a-f]+)")
@@ -48,7 +48,7 @@
                              :props (parse-iproplist properties)
                              :link :ethernet
                              :type (detect-iface-type name)
-                             :address address)
+                             :address (parse-macaddr address))
               interfaces))
       (reverse interfaces))))
 
@@ -97,3 +97,13 @@
   (if (directory-exists-p (format nil "/sys/class/net/~A/wireless" name))
       :wifi
       :wired))
+
+(defun parse-macaddr (string)
+  (make-array 6 :element-type '(unsigned-byte 16)
+                :initial-contents (mapcar (lambda (x)
+                                            (parse-integer x :radix 16))
+                                          (split-sequence #\: string))))
+
+(defun princ-macaddr-to-string (macaddr)
+  (let ((*print-base* #x10))
+    (join* #\: (map 'list #'princ-to-string macaddr))))
