@@ -34,10 +34,10 @@
 
 (defun list-interfaces ()
   (multiple-value-bind (retcode stdout)
-      (run-program (list *ipcmd* "--oneline" "link"))
+      (run-program (list *ipcmd* "--oneline" "link" "list"))
     (unless (zerop retcode)
       (error "Cannot list interfaces: ~A ~A returned ~A"
-             *ipcmd* "link" retcode))
+             *ipcmd* "link list" retcode))
     (let ((interfaces ()))
       (ppcre:do-register-groups (id name flags properties address)
           (+ifaceinfo-regexp+ stdout)
