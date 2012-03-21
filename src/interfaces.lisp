@@ -62,12 +62,13 @@
              ("BROADCAST"   :broadcast)
              ("POINTOPOINT" :point-to-point)
              ("MULTICAST"   :multicast)
-             ("PROMISC"     :promiscuous)
-             ("ALLMULTI"    :all-multicast)
+             ("PROMISC"     nil)
+             ("ALLMULTI"    nil)
              ("NOARP"       :no-arp)
-             ("DYNAMIC"     :dynamic)
+             ("DYNAMIC"     nil)
+             ("MASTER"      :master)
              ("SLAVE"       :slave))))
-    (mapcar #'intern-flag (split-sequence #\, flags))))
+    (remove nil (mapcar #'intern-flag (split-sequence #\, flags)))))
 
 (defun parse-iproplist (properties)
   (loop :for (key val) :on (split-sequence #\Space properties) :by #'cddr
