@@ -11,7 +11,8 @@
   :depends-on (:iolib.base :iolib.syscalls :iolib.os :cffi :cl-ppcre)
   :pathname "src/"
   :components ((:file "pkgdcl")
-               (:file "interfaces" :depends-on ("pkgdcl"))))
+               (:file "config" :depends-on ("pkgdcl"))
+               (:file "interfaces" :depends-on ("pkgdcl" "config"))))
 
 (defmethod perform ((o test-op) (c (eql (find-system :middleman))))
   (oos 'test-op :middleman-tests))

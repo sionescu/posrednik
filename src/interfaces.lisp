@@ -5,8 +5,6 @@
 
 (in-package :middleman)
 
-(defparameter *ipcmd* "/sbin/ip")
-
 (defclass interface ()
   ((id        :initarg :id        :reader interface.id)
    (name      :initarg :name      :reader interface.name)
