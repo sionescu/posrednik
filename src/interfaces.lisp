@@ -28,7 +28,7 @@
               (princ-macaddr-to-string (interface.address i))))))
 
 (defconstant (+ifaceinfo-regexp+ :test #'string=)
-  "([0-9]): ([a-z0-9.]+): <([-_,A-Z]+)> ([ _a-zA-Z0-9]+)\\\\ +link/ether ([0-9a-f][:0-9a-f]+)")
+  "([0-9]): ([a-z0-9.]+): <([-_,A-Z]+)> +([ _a-zA-Z0-9]+)\\\\ +link/ether ([0-9a-f][:0-9a-f]+)")
 
 (defun list-interfaces ()
   (multiple-value-bind (retcode stdout)
@@ -43,7 +43,7 @@
                              :id id
                              :name name
                              :flags (parse-iflags flags)
-                             :props (parse-iproplist properties)
+                             :props (parse-iproplist (string-right-trim '(#\Space) properties))
                              :link :ethernet
                              :type (detect-iface-type name)
                              :address (parse-macaddr address))
