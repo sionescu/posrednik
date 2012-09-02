@@ -80,6 +80,8 @@
      (cons :qdisc val))
     ("state"
      (cons :state (parse-interface-state val)))
+    ("mode"
+     (cons :mode (parse-interface-mode val)))
     ("qlen"
      (cons :qlen (parse-positive-int val)))))
 
@@ -93,6 +95,11 @@
     ("UNKNOWN" :unknown)
     ("UP"      :up)
     ("DOWN"    :down)
+    ("DORMANT" :dormant)))
+
+(defun parse-interface-mode (mode)
+  (eswitch (mode :test #'string=)
+    ("DEFAULT" :default)
     ("DORMANT" :dormant)))
 
 (defun detect-iface-type (name)
