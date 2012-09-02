@@ -114,5 +114,4 @@
                                           (split-sequence #\: string))))
 
 (defun princ-macaddr-to-string (macaddr)
-  (let ((*print-base* #x10))
-    (join* #\: (map 'list #'princ-to-string macaddr))))
+  (format nil "~{~2,'0X~^:~}" (coerce macaddr 'list)))
