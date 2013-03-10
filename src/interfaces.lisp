@@ -3,7 +3,7 @@
 ;;; --- Package definition.
 ;;;
 
-(in-package :middleman)
+(in-package :posrednik)
 
 (defclass interface ()
   ((id        :initarg :id        :reader interface.id)

@@ -3,6 +3,6 @@
 ;;; --- Run-time configuration.
 ;;;
 
-(in-package :middleman)
+(in-package :posrednik)
 
 (defvar *ipcmd* "/sbin/ip")

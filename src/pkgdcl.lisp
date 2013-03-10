@@ -3,10 +3,7 @@
 ;;; --- Package definition.
 ;;;
 
-(in-package :common-lisp-user)
-
-(defpackage :middleman
-  (:nicknames #:mm)
+(defpackage :posrednik
   (:use :iolib.base :cffi :iolib.pathnames :iolib.os)
   (:export
    ))

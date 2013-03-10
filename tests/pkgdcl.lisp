@@ -3,7 +3,5 @@
 ;;; pkgdcl.lisp --- Package definition.
 ;;;
 
-(in-package :common-lisp-user)
-
-(defpackage :middleman-tests
-  (:use :5am :iolib.base :middleman))
+(defpackage :posrednik/tests
+  (:use :iolib.base :5am :posrednik))
